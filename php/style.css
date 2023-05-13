@@ -1,0 +1,89 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    font-family: 'Times New Roman', Times, serif;
+    background-color: rgb(139, 221, 253);
+    height: 100vh;
+}
+
+#student_img{
+    height:87px; 
+    width: 109px;
+    padding: 8px;
+}
+
+.container{
+
+    width: 300px;
+    max-height: 800px;
+    padding: 10px;
+    display: flex;
+    border: 2px solid black;
+    background-color: white;
+    text-align: center;
+}
+
+.box{
+    width: 280px;
+    height: 40px;
+    border: 1px solid skyblue;
+    margin: 10px;
+    text-align: center;
+    padding: 3px;
+
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    margin: 5px;
+    
+}
+
+.btn{
+    width: 60px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: skyblue;
+
+}
+
+#enrollment_no, #password{
+
+    width: 90%;
+    height: 70%;
+    margin: 6px;
+    border : none;
+    padding: 2px;
+}
+
+#admin_email{
+
+    width: 90%;
+    height: 70%;
+    margin: 6px;
+    border : none;
+    padding: 2px;
+}
+.icon {
+    height: 30vh;
+    width: 20vw;
+}
+/* #enrollment_no{
+    padding: 3px;
+}
+
+#password{
+    padding: 3px;
+}
+
+form{
+    margin-top: 15vh;
+    margin-bottom: 40vh;
+    margin-left: 40vw;
+    margin-right: 35vw;
+    background-color: white;
+} */

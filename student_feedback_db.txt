@@ -1,0 +1,105 @@
+create database student_feedback_db;
+
+use student_feedback_db;
+
+create table admin
+(
+    admin_email varchar(60) primary key,
+    password varchar(20) not null
+);
+
+create table academic_session
+(
+    academic_session_id varchar(25),
+    dept_name varchar(5) not null,
+    semester int not null,
+    section char not null,
+    duration varchar(10) not null,
+    year int not null,
+    primary key (academic_session_id)
+);
+
+create trigger academic_session_insert_trigger
+before insert on academic_session
+for each row
+set new.academic_session_id = CONCAT(new.dept_name, new.semester, new.section, new.duration, new.year);
+
+create trigger academic_session_update_trigger
+before update on academic_session
+for each row
+set new.academic_session_id = CONCAT(new.dept_name, new.semester, new.section, new.duration, new.year);
+
+create table subj
+(
+    subject_code varchar(8) primary key,
+    subject_name varchar(60) not null,
+    dept_name varchar(5)  not null CHECK(dept_name IN ('CS', 'IT', 'ME', 'CE', 'EC', 'MBA')),
+    semester int not null
+);
+
+create table faculty
+(
+    faculty_email varchar(60) primary key,
+    name varchar(40) not null
+);
+
+create table academic_session_subject_faculty
+(
+    academic_session_id varchar(25),
+    subject_code varchar(8),
+    faculty_email varchar(60),
+    foreign key(academic_session_id) REFERENCES academic_session(academic_session_id),
+    foreign key(subject_code) REFERENCES subj(subject_code),
+    foreign key(faculty_email) REFERENCES faculty(faculty_email),
+    primary key(academic_session_id, subject_code, faculty_email) 
+);
+
+create table student
+(
+    enrollment_no varchar(12) primary key,
+    name varchar(40) not null
+);
+
+create table academic_session_student
+(
+    enrollment_no varchar(12), 
+    academic_session_id varchar(25),
+    foreign key(enrollment_no) REFERENCES student(enrollment_no),
+    foreign key(academic_session_id) REFERENCES academic_session(academic_session_id),
+    primary key(enrollment_no, academic_session_id)
+);
+
+create table feedback_form
+(
+    form_id int primary key auto_increment,
+    academic_session_id varchar(25),
+    subject_code varchar(8),
+    form_date date,
+    foreign key(academic_session_id) references academic_session(academic_session_id),
+    foreign key(subject_code) references subj(subject_code),
+    form_status tinyint default 0
+);
+
+create table feedback
+(
+    form_id int,
+    enrollment_no varchar(12),		
+    a1 char,
+    a2 char,
+    a3 char,
+    a4 char,
+    a5 char,
+    a6 char,
+    a7 char,
+    a8 char,
+    a9 char,
+    a10 char,
+    a11 char,
+    a12 char,
+    a13 char,
+    a14 char,
+    a15 char,
+    foreign key(form_id) references feedback_form(form_id),
+    foreign key(enrollment_no) references student(enrollment_no),
+    primary key(form_id, enrollment_no)
+);
